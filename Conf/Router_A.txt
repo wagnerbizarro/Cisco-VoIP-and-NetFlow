@@ -1,0 +1,45 @@
+Router_A#show running-config
+Building configuration…
+hostname Router_A
+!
+ip dhcp pool VOICE
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+option 150 ip 192.168.10.1
+!
+interface FastEthernet0/0
+ip address 192.168.10.1 255.255.255.0
+duplex auto
+speed auto
+!
+interface FastEthernet0/1
+ip flow ingress
+ip address 192.168.20.1 255.255.255.0
+duplex auto
+speed auto
+!
+ip flow-export destination 192.168.20.2 9996
+ip flow-export version 9
+!
+telephony-service
+max-ephones 5
+max-dn 5
+ip source-address 192.168.10.1 port 2000
+auto assign 1 to 5
+!
+ephone-dn 1
+number 54001
+!
+ephone-dn 2
+number 54002
+!
+ephone-dn 3
+number 54003
+!
+ephone-dn 4
+number 54004
+!
+ephone-dn 5
+number 54005
+!
+end
